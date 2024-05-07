@@ -10,7 +10,7 @@ int main(){
 
     printf("Digite resposta que foi marcada na prova.\n");
     for (i = 0; i < 10; i++){
-        printf("Questão %d; ", i+1);
+        printf("Questão %d: ", i+1);
         scanf(" %c", &resposta[i]);
     }
 
