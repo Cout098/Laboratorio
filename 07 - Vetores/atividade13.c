@@ -17,7 +17,6 @@ int main(){
 
             if(n >= 0){
                 vetor1[i] = n;
-
                 if (i%2==0){
                     vetor2[j] = vetor1[i] / 2;
                     j++;

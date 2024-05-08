@@ -13,7 +13,6 @@ int main(){
         scanf("%d", &vetor[i]);
     }
 
-    
     for ( i = 0; i < 10; i++){
         if(vetor[i] == 5){
             cinco++;
