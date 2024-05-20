@@ -1,52 +1,51 @@
 #include <stdio.h>
 
-int main()
-{
+void preencherMatriz(int matriz[4][4]);
+void imprimirMatriz(int matriz [4][4]);
+void conferirMaior(int matriz[4][4], int *linha, int *coluna);
+
+int main(){
     int matriz[4][4];
-    int i, j;
-    int maiorValor; // Não é necessário inicializar aqui, será feita durante a leitura
-    int linhaMaior, colunaMaior;
+    int linha, coluna;
 
-    // Preenchendo a matriz
-    printf("Preencha a matriz 4x4:\n");
-    for (i = 0; i < 4; i++)
-    {
-        for (j = 0; j < 4; j++)
-        {
-            printf("Digite o elemento %d %d: ", i + 1, j + 1);
+    preencherMatriz(matriz);
+    imprimirMatriz(matriz);
+    conferirMaior(matriz, &linha, &coluna);
+
+    printf("O Maior valor esta na linha %d, coluna %d.", linha+1, coluna+1);
+
+    return 0;
+}
+
+void preencherMatriz(int matriz[4][4]){
+    for (int i = 0; i < 4; i++){
+        for(int j = 0; j < 4; j++){
+            printf("Digite um numero para posicao[%d][%d]: ", i+1, j+1);
             scanf("%d", &matriz[i][j]);
-
-            // Inicializa maiorValor com o primeiro elemento da matriz
-            if (i == 0 && j == 0)
-            {
-                maiorValor = matriz[i][j];
-                linhaMaior = i;
-                colunaMaior = j;
-            }
-
-            // Verifica se o elemento atual é o maior encontrado até agora
-            if (matriz[i][j] > maiorValor)
-            {
-                maiorValor = matriz[i][j];
-                linhaMaior = i;
-                colunaMaior = j;
-            }
         }
+        system("cls");
     }
+}
 
-    // Imprimindo a matriz
-    printf("\nMatriz inserida:\n");
-    for (i = 0; i < 4; i++)
-    {
-        for (j = 0; j < 4; j++)
-        {
+void imprimirMatriz(int matriz [4][4]){
+    printf("MATRIZ\n");
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
             printf("%d\t", matriz[i][j]);
         }
         printf("\n");
     }
+}
 
-    // Imprimindo a localização do maior valor
-    printf("\nO maior valor encontrado foi %d, na linha %d e coluna %d.\n", maiorValor, linhaMaior + 1, colunaMaior + 1);
-
-    return 0;
+void conferirMaior(int matriz[4][4], int *linha, int *coluna){
+    int maior = matriz[0][0];
+    for (int i = 0; i < 4; i++){
+        for(int j = 0; j < 4; j++){
+            if(matriz[i][j] > maior){
+                maior = matriz[i][j];
+                *linha = i;
+                *coluna = j;
+            }
+        }
+    }
 }

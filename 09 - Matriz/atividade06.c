@@ -1,44 +1,61 @@
 #include <stdio.h>
 
-int main()
-{
-    int matriz[5][5];
-    int i, j;
-    int busca;
-    int encontrado = 0; // Flag
+#define tam 5
 
-    printf("Preencha a matriz 5x5:\n");
-    for (i = 0; i < 5; i++)
-    {
-        for (j = 0; j < 5; j++)
-        {
-            printf("Digite o elemento %d %d: ", i + 1, j + 1);
-            scanf("%d", &matriz[i][j]);
-        }
+void preencherMatriz(int matriz[tam][tam]);
+void imprimirMatriz(int main[tam][tam]);
+int localizar(int matriz[tam][tam], int procurado, int *linha, int *coluna);
+
+int main(){
+    int matriz[tam][tam];
+    int linha, coluna, procurado;
+
+    preencherMatriz(matriz);
+    imprimirMatriz(matriz);
+
+    printf("Digite o numero a ser encontrado: ");
+    scanf("%d", &procurado);
+
+    if (localizar(matriz, procurado, &linha, &coluna)){
+        printf("O numero buscado se encontra na linha %d e coluna %d", linha+1, coluna+1);
+
+    } else{
+        printf("Nao foi encontrado");
     }
 
-    // Pedindo ao usuário o número a ser pesquisado
-    printf("\nDigite o numero que deseja pesquisar na matriz: ");
-    scanf("%d", &busca);
+    return 0;
+}
 
-    // Pesquisando o número na matriz
-    for (i = 0; i < 5; i++)
-    {
-        for (j = 0; j < 5; j++)
-        {
-            if (matriz[i][j] == busca)
-            {
-                printf("O numero %d foi encontrado na posicao %d %d da matriz.\n", busca, i + 1, j + 1);
-                encontrado = 1; // Altera a flag para indicar que o número foi encontrado
+
+void preencherMatriz(int matriz[tam][tam]){
+    for (int i = 0; i < 4; i++){
+        for(int j = 0; j < 4; j++){
+            printf("Digite um numero para posicao[%d][%d]: ", i+1, j+1);
+            scanf("%d", &matriz[i][j]);
+        }
+        system("cls");
+    }
+}
+
+void imprimirMatriz(int matriz [tam][tam]){
+    printf("MATRIZ\n");
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            printf("%d\t", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int localizar(int matriz[tam][tam], int procurado, int *linha, int *coluna) {
+    for (int i = 0; i < tam; i++){
+        for (int j = 0; j < tam; j++){
+            if(matriz[i][j] == procurado){
+                *linha = i;
+                *coluna = j;
+                return 1;
             }
         }
     }
-
-    // Se o número não foi encontrado, exibe uma mensagem
-    if (!encontrado)
-    {
-        printf("O numero %d nao foi encontrado na matriz.\n", busca);
-    }
-
     return 0;
 }
